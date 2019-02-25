@@ -30,12 +30,12 @@ class NewVistorTest(unittest.TestCase):
         #回车，页面更新
         #待办事项表格显示 “1.买鱼饵”
         inputbox.send_keys(Keys.ENTER)
-        time.sleep(1)
+        time.sleep(3)
 
         table = self.browser.find_element_by_id('id_list_table')
         rows =table.find_elements_by_tag_name('tr')
-        self.assertTrue(any(row.text == '1.买鱼饵' for row in rows))
-        
+        self.assertTrue(any(row.text == '1.买鱼饵' for row in rows), "新待办事项不显示")
+
         self.fail('finish the test')
 
 
