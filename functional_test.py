@@ -34,7 +34,22 @@ class NewVistorTest(unittest.TestCase):
 
         table = self.browser.find_element_by_id('id_list_table')
         rows =table.find_elements_by_tag_name('tr')
-        self.assertTrue(any(row.text == '1.买鱼饵' for row in rows), "新待办事项不显示")
+        # self.assertTrue(any(row.text == '1.买鱼饵' for row in rows), f"新待办事项不显示, 内容为:\n {table.text}")
+        self.assertIn('1.买鱼饵', [row.text for row in rows])
+
+        #输入页面重新显示
+        #输入'买鱼竿‘
+        inputbox =self.browser.find_element_by_id('id_new_item')
+        inputbox.send_keys('买鱼竿')
+        inputbox.send_keys(Keys.ENTER)
+        time.sleep(1)
+
+        #页面再次更新
+        table =self.browser.find_element_by_id('id_list_table')
+        rows =  table.find_elements_by_tag_name('tr')
+        self.assertIn('1.买鱼饵', [row.text for row in rows])
+        self.assertIn('2.买鱼竿', [row.text for row in rows])
+
 
         self.fail('finish the test')
 
