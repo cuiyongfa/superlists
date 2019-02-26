@@ -13,6 +13,11 @@ class NewVistorTest(unittest.TestCase):
     def tearDown(self):
         self.browser.quit()
 
+    def check_row_in_list_table(self, row_text):
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertIn(row_text, [row.text for row in rows])
+
     def test_can_start_a_list_and_retrieve_it_later(self):
         #首页
         self.browser.get('http://localhost:8000')
@@ -31,11 +36,7 @@ class NewVistorTest(unittest.TestCase):
         #待办事项表格显示 “1.买鱼饵”
         inputbox.send_keys(Keys.ENTER)
         time.sleep(3)
-
-        table = self.browser.find_element_by_id('id_list_table')
-        rows =table.find_elements_by_tag_name('tr')
-        # self.assertTrue(any(row.text == '1.买鱼饵' for row in rows), f"新待办事项不显示, 内容为:\n {table.text}")
-        self.assertIn('1.买鱼饵', [row.text for row in rows])
+        self.check_row_in_list_table('1.买鱼饵')
 
         #输入页面重新显示
         #输入'买鱼竿‘
@@ -44,12 +45,9 @@ class NewVistorTest(unittest.TestCase):
         inputbox.send_keys(Keys.ENTER)
         time.sleep(1)
 
-        #页面再次更新
-        table =self.browser.find_element_by_id('id_list_table')
-        rows =  table.find_elements_by_tag_name('tr')
-        self.assertIn('1.买鱼饵', [row.text for row in rows])
-        self.assertIn('2.买鱼竿', [row.text for row in rows])
-
+        #页面再次更新，显示两个事项
+        self.check_row_in_list_table('1.买鱼饵')
+        self.check_row_in_list_table('2.买鱼竿')
 
         self.fail('finish the test')
 
