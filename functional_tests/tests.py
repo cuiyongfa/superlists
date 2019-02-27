@@ -1,11 +1,12 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
+from django.test import LiveServerTestCase
 
 import unittest
 
 
-class NewVistorTest(unittest.TestCase):
+class NewVistorTest(LiveServerTestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
@@ -20,7 +21,7 @@ class NewVistorTest(unittest.TestCase):
 
     def test_can_start_a_list_and_retrieve_it_later(self):
         #首页
-        self.browser.get('http://localhost:8000')
+        self.browser.get(self.live_server_url)
         #标题和头部都包含“待办事项”
         self.assertIn('待办事项', self.browser.title)
         header_text = self.browser.find_element_by_tag_name('h1').text
@@ -52,6 +53,4 @@ class NewVistorTest(unittest.TestCase):
         self.fail('finish the test')
 
 
-if __name__ == '__main__':
-    unittest.main(warnings='ignore')
 
