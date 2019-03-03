@@ -1,17 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>待办事项</title>
-</head>
-<body>
-<h1>开始待办事项</h1>
-<form method="POST" action="/lists/new">
-    <p style = "text-align: center">
-        <input id="id_new_item" placeholder="输入待办事项" name="item_text"/>
-    </p>
-    {% csrf_token %}
-</form>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block header_text %}开始待办事项列表{% endblock %}
+{% block form_action %}/lists/new{% endblock %}
