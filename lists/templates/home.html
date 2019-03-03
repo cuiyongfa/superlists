@@ -5,15 +5,11 @@
     <title>待办事项</title>
 </head>
 <body>
-<h1>待办事项</h1>
-<form method="POST">
+<h1>开始待办事项</h1>
+<form method="POST" action="/lists/new">
 <input id="id_new_item" placeholder="输入待办事项" name="item_text"/>
     {% csrf_token %}
 </form>
-<table id="id_list_table">
-    <tr>
-        <td>1.{{ new_item_text }}</td>
-    </tr>
-</table>
+
 </body>
 </html>
