@@ -48,7 +48,7 @@ class NewVistorTest(LiveServerTestCase):
         self.assertEqual(inputbox.get_attribute('placeholder'), '输入待办事项')
         #输入了“买鱼饵”
         inputbox.send_keys('买鱼饵')
-        #回车，页面更新
+        #回车，页面更新ma
         #待办事项表格显示 “1.买鱼饵”
         inputbox.send_keys(Keys.ENTER)
         time.sleep(1)
@@ -91,7 +91,7 @@ class NewVistorTest(LiveServerTestCase):
         # time.sleep(1)
         self.assertRegex(two_list_url, '/lists/.+')
         self.assertNotEqual(two_list_url, one_list_url)
-        self.wait_for_row_in_list_table('1:买牛奶')
+        self.wait_for_row_in_list_table('1.买牛奶')
         page_text = self.browser.find_element_by_tag_name('body').text
         self.assertNotIn('买鱼饵', page_text)
 
