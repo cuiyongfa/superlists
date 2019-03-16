@@ -16,7 +16,7 @@ class NewVisitorTest(FunctionalTest):
 
         #要求输入“待办事项”
 
-        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox = self.get_item_input_box()
         self.assertEqual(inputbox.get_attribute('placeholder'), '输入待办事项')
         #输入了“买鱼饵”
         inputbox.send_keys('买鱼饵')
@@ -31,7 +31,7 @@ class NewVisitorTest(FunctionalTest):
 
         #输入页面重新显示
         #输入'买鱼竿‘
-        inputbox =self.browser.find_element_by_id('id_new_item')
+        inputbox =self.get_item_input_box()
         inputbox.send_keys('买鱼竿')
         inputbox.send_keys(Keys.ENTER)
 
@@ -55,7 +55,7 @@ class NewVisitorTest(FunctionalTest):
         #第二人输入清单
         #得到他的URL
         #显示他的内容不显示另一人的内容
-        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox = self.get_item_input_box()
         inputbox.send_keys('买牛奶')
         inputbox.send_keys(Keys.ENTER)
         time.sleep(1)

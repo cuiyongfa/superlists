@@ -8,6 +8,9 @@ MAX_WAIT = 10
 
 class FunctionalTest(StaticLiveServerTestCase):
 
+    def get_item_input_box(self):
+        return self.browser.find_element_by_id('id_text')
+
     @classmethod
     def setUpClass(cls):
         for arg in sys.argv:
@@ -24,6 +27,7 @@ class FunctionalTest(StaticLiveServerTestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
+        self.browser.implicitly_wait(3)
 
     def tearDown(self):
         self.browser.quit()
